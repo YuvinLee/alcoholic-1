@@ -90,8 +90,11 @@ public class RoomSearchingActivity extends AppCompatActivity {
 
 
 
-
+                    //바코드 인식했을 때 결과가 나와
                     Log.d("Detection", barcodeContents);
+
+                    //1. 서버에 해당되는 결과를 보내.
+                    //2. 방이 일치할 때, 처리해야됨.
                 }
             }
         });

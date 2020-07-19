@@ -6,6 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RoomStartActivity">
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
