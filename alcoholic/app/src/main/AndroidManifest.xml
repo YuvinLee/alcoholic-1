@@ -16,7 +16,6 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true">
         android:theme="@style/AppTheme">
-
         <activity android:name=".Activity.RoomActivity" />
 
         <activity android:name=".Activity.RoomSearchingActivity">
