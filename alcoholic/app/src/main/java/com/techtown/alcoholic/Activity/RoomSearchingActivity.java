@@ -13,4 +13,9 @@ public class RoomSearchingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_searching);
     }
+
+
+
+
+
 }
