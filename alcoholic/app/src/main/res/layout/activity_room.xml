@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RoomActivity">
 
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="285dp"
+        android:layout_height="284dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="116dp"
+        android:background="#6A1B9A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
