@@ -4,31 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
-import com.techtown.alcoholic.Fragment.RoomGameListFragment;
-import com.techtown.alcoholic.Fragment.RoomInfoFragment;
 import com.techtown.alcoholic.R;
 
+import java.util.Hashtable;
+
 public class RoomActivity extends AppCompatActivity {
-
-    Button btnRoomInfoFragment,btnRoomGameListFragment;
-
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-
-    RoomGameListFragment roomGameListFragment;
-    RoomInfoFragment roomInfoFragment;
-    Context context;
+    private String TAG = "RoomLog";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+
         context=this;
 
         fragmentManager = getSupportFragmentManager();
@@ -78,6 +67,28 @@ public class RoomActivity extends AppCompatActivity {
                 break;
 
         }
+
+
+        imageViewQRCode = (ImageView)findViewById(R.id.qrCode);
+
+
+        textForQRCode = "테스트";
+
+        Log.d(TAG, "onCreate: ");
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try{
+            /* Encode to utf-8 */
+            Hashtable hints = new Hashtable();
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+
+            //width랑 height에서 QR코드 이미지 크기 조정
+            BitMatrix bitMatrix = multiFormatWriter.encode(textForQRCode, BarcodeFormat.QR_CODE,200,200, hints);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            imageViewQRCode.setImageBitmap(bitmap);
+
+        }catch (Exception e){}
+
     }
 
 }
