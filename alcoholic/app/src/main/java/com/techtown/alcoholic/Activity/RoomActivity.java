@@ -1,17 +1,10 @@
 package com.techtown.alcoholic.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.techtown.alcoholic.R;
 
 import java.util.Hashtable;
@@ -19,14 +12,61 @@ import java.util.Hashtable;
 public class RoomActivity extends AppCompatActivity {
     private String TAG = "RoomLog";
 
-    //QR코드가 보여질 이미지 부분
-    private ImageView imageViewQRCode;
-    //QR코드 값 받기
-    private String textForQRCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
+
+        context=this;
+
+        fragmentManager = getSupportFragmentManager();
+
+        btnRoomGameListFragment= findViewById(R.id.btn_RoomGameListFragment);
+        btnRoomInfoFragment = findViewById(R.id.btn_RoomInfoFragment);
+
+
+        fragmentTransaction= fragmentManager.beginTransaction();
+
+        btnRoomInfoFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFrag(0);
+            }
+        });
+        btnRoomGameListFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFrag(1);
+            }
+        });
+
+        roomGameListFragment = new RoomGameListFragment();
+        roomInfoFragment = new RoomInfoFragment();
+
+
+        fragmentTransaction.replace(R.id.FrameLayout,roomInfoFragment).commitAllowingStateLoss();
+        setFrag(0);
+
+    }
+
+
+
+    public void setFrag(int n) {
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        switch (n){
+            case 0:
+                fragmentTransaction.replace(R.id.FrameLayout,roomInfoFragment);
+                fragmentTransaction.commit();
+                break;
+            case 1:
+                    fragmentTransaction.replace(R.id.FrameLayout,roomGameListFragment);
+
+                fragmentTransaction.commit();
+                break;
+
+        }
 
 
         imageViewQRCode = (ImageView)findViewById(R.id.qrCode);
@@ -48,5 +88,7 @@ public class RoomActivity extends AppCompatActivity {
             imageViewQRCode.setImageBitmap(bitmap);
 
         }catch (Exception e){}
+
     }
+
 }
